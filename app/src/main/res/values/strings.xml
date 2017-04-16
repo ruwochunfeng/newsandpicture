@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">看看</string>
+    <string name="call">电话</string>
+    <string name="friend">朋友</string>
+    <string name="mail">邮件</string>
+    <string name="task">任务</string>
+    <string name="fengxiang">分享</string>
+    <string name="location">位置</string>
+
+    <string name="man">周兵</string>
+
+</resources>
