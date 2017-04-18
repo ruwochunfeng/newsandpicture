@@ -15,22 +15,28 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.zhoubing.newsandpicture.Adater.FruitAdapter;
+import com.zhoubing.newsandpicture.Adater.newsAdapter;
+import com.zhoubing.newsandpicture.News;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
-    private Fruit  fruit =new Fruit("APPLE",R.drawable.tupian);
-    private List<Fruit> mList = new ArrayList<>();
-    private FruitAdapter adapter ;
+//    private Fruit  fruit =new Fruit("APPLE",R.drawable.tupian);
+    private News news = new News(R.drawable.mail,"邮件","来自朋友祝福的邮件，谢谢");
+//    private List<Fruit> mList = new ArrayList<>();
+    private List<News> mNewsList = new ArrayList<>();
+//    private FruitAdapter adapter ;
+    private newsAdapter newsAdapter1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initFruit();
+//        initFruit();
+        initNews();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -38,10 +44,12 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         RecyclerView recycler = (RecyclerView) findViewById(R.id.recyclerview);
-        GridLayoutManager grid = new GridLayoutManager(this,2);
-        recycler.setLayoutManager(grid);
-        adapter = new FruitAdapter(mList);
-        recycler.setAdapter(adapter);
+        //  GridLayoutManager grid = new GridLayoutManager(this,2);
+
+        //  recycler.setLayoutManager(grid);
+//        adapter = new FruitAdapter(mList);
+        newsAdapter1 = new newsAdapter(mNewsList);
+        recycler.setAdapter(newsAdapter1);
 
         if(actionBar!=null){
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -58,12 +66,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void initFruit() {
-        mList.clear();
-        for(int i = 0;i<40;i++){
-            mList.add(fruit);
+//    private void initFruit() {
+//        mList.clear();
+//        for(int i = 0;i<40;i++){
+//            mList.add(fruit);
+//        }
+//    }
+
+    private void initNews(){
+        mNewsList.clear();
+        for(int i = 0;i<20;i++){
+            mNewsList.add(news);
         }
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
