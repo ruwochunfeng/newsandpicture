@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -44,9 +45,11 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         RecyclerView recycler = (RecyclerView) findViewById(R.id.recyclerview);
+        recycler.setLayoutManager(new LinearLayoutManager(this));
         //  GridLayoutManager grid = new GridLayoutManager(this,2);
 
         //  recycler.setLayoutManager(grid);
+
 //        adapter = new FruitAdapter(mList);
         newsAdapter1 = new newsAdapter(mNewsList);
         recycler.setAdapter(newsAdapter1);
