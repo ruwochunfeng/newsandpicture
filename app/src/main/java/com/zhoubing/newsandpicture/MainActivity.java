@@ -13,9 +13,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.zhoubing.newsandpicture.Adater.FruitAdapter;
+import com.zhoubing.newsandpicture.Adater.KuaibaoAdater;
 import com.zhoubing.newsandpicture.Adater.newsAdapter;
 import com.zhoubing.newsandpicture.News;
 
@@ -28,8 +30,11 @@ public class MainActivity extends AppCompatActivity {
     private News news = new News(R.drawable.mail,"邮件","来自朋友祝福的邮件，谢谢");
 //    private List<Fruit> mList = new ArrayList<>();
     private List<News> mNewsList = new ArrayList<>();
+
+    private List<Kuaibao> mKuaibao = new ArrayList<>();
 //    private FruitAdapter adapter ;
     private newsAdapter newsAdapter1;
+    private KuaibaoAdater kuaibaoAdater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        initFruit();
         initNews();
+        initKuaibao();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -52,7 +58,14 @@ public class MainActivity extends AppCompatActivity {
 
 //        adapter = new FruitAdapter(mList);
         newsAdapter1 = new newsAdapter(mNewsList);
-        recycler.setAdapter(newsAdapter1);
+        kuaibaoAdater = new KuaibaoAdater(mKuaibao);
+        recycler.setAdapter(kuaibaoAdater);
+        kuaibaoAdater.setOnItemClickListener(new KuaibaoAdater.onRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, String data) {
+                Toast.makeText(MainActivity.this,data,Toast.LENGTH_SHORT).show();
+            }
+        });
 
         if(actionBar!=null){
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -82,6 +95,14 @@ public class MainActivity extends AppCompatActivity {
             mNewsList.add(news);
         }
     }
+    private void initKuaibao(){
+        mKuaibao.clear();
+        for(int i = 0;i<20;i++){
+            Kuaibao kuaibao = new Kuaibao("简单的内容"+i);
+            mKuaibao.add(kuaibao);
+        }
+    }
+
 
 
 
@@ -106,6 +127,6 @@ public class MainActivity extends AppCompatActivity {
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
         }
-        return  true;
+        return true;
     }
 }
